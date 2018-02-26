@@ -15,6 +15,8 @@ RUN apt-get update && \
   apt-get update && \
   apt-get -y install docker-ce
 
-RUN usermod -aG docker jenkins
+RUN usermod -a -G docker jenkins
+ADD ./entrypoint.sh /usr/local/bin/jenkins-with-docker.sh
+RUN chmod +x /usr/local/bin/jenkins-with-docker.sh
 
-USER jenkins
+ENTRYPOINT /usr/local/bin/jenkins-with-docker.sh
