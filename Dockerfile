@@ -19,4 +19,7 @@ RUN usermod -a -G docker jenkins
 ADD ./entrypoint.sh /usr/local/bin/jenkins-with-docker.sh
 RUN chmod +x /usr/local/bin/jenkins-with-docker.sh
 
+# allow jenkins to execute docker command with root privileges
+RUN echo 'jenkins ALL=(ALL) NOPASSWD: /usr/bin/docker' >> /etc/sudoers
+
 ENTRYPOINT /usr/local/bin/jenkins-with-docker.sh
